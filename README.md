@@ -31,7 +31,7 @@ new EllipsisText(
   HTMLElement,
 {
   str: String,
-  rows: Number,
+  row: Number,
   callback:function(res){}
 })
 ```
