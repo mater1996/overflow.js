@@ -7,7 +7,7 @@
 npm:
 
 ```sh
-npm install omit --save-dev
+npm install ellipsis-text --save-dev
 ```
 
 ## Usage example
