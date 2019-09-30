@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="../dist/omit.umd.js"></script>
+    <script src="../dist/ellipsis-text.umd.js"></script>
     <style>
       .main {
         width: 280px;
@@ -18,7 +18,7 @@
       const main = document.querySelector('.main')
       const time1 = Date.now()
       let testStr = '<p>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame</p>'
-      var omit =  new Omit(main,{
+      var omit =  new EllipsisText(main,{
         str:new Array(1000).fill(testStr).join(''),
         callback:function(res){
           main.innerHTML = res;

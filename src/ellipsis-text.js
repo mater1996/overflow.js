@@ -182,4 +182,4 @@ class EllipsisText {
   }
 }
 
-module.exports = EllipsisText
+export default EllipsisText
