@@ -101,7 +101,6 @@ class EllipsisText {
     canvas.height = parseFloat(height, 10) * 1.5
     context.textBaseline = 'top'
     context.font = `${fontSize} normal`
-    document.body.appendChild(canvas)
     return context
   }
 
