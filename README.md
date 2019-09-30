@@ -2,7 +2,7 @@
 
 > A generator that gets the minimum content that corresponds to the height of an element
 
-![](header.png)
+![](header.png){:height="100px" width="100px"}
 
 ## Installation
 
