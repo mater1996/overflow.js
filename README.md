@@ -70,11 +70,11 @@ Mater1996 – bxh8640@gmail.com
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
-[LICENSE](https://github.com/Mater1996/omit/blob/master/LICENSE)
+[LICENSE](https://github.com/Mater1996/ellipsis-text/blob/master/LICENSE)
 
 ## Contributing
 
-1. Fork it (<https://github.com/Mater1996/Mater1996.github.io>)
+1. Fork it (<https://github.com/Mater1996/ellipsis-text>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
