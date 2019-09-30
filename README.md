@@ -2,8 +2,6 @@
 
 > A generator that gets the minimum content that corresponds to the height of an element
 
-<img src="header.png" height="100" width="100" />
-
 ## Installation
 
 npm:
