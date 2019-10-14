@@ -47,7 +47,7 @@ var ellipsisText = new EllipsisText(document.querySelector('#ellipsis'), {
 })
 ```
 
-![example](example.png)
+![example](https://github.com/Mater1996/ellipsis-text/blob/master/example.png)
 
 ## EllipsisText API
 
@@ -78,7 +78,7 @@ function dotdotdot just replace last three letter, but you can use [dotdotdot.js
 
 The following is an EllipsisText performance test (in ms)
 
-![](performance.jpg)
+![](https://github.com/Mater1996/ellipsis-text/blob/master/performance.jpg)
 
 ## Development setup
 
