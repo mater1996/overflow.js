@@ -10,6 +10,10 @@
   "browser": "dist/ellipsis-text.umd.js",
   "private": false,
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Mater1996/ellipsis-text.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.6.2",
