@@ -41,7 +41,7 @@ var ellipsisText = new EllipsisText(document.querySelector('#ellipsis'), {
 })
 ```
 
-![](example.jpg)
+![](example.png)
 
 ## EllipsisText API
 
