@@ -10,7 +10,7 @@ npm:
 npm install ellipsis-text --save-dev
 ```
 
-## demo
+## Demo
 
 [demo](https://mater1996.github.io/example/ellipsisText.html)
 
