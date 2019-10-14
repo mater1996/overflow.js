@@ -21,9 +21,9 @@ import EllipsisText from 'ellipsis-text'
 new EllipsisText(document.querySelector('#ellipsis'), {
   str:
     'Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame',
-  callback:function(res){
-      console.log(res) 
-      // output:Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowled
+  callback: function(res) {
+    console.log(res)
+    // output:Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowled
   }
 })
 ```
@@ -34,26 +34,31 @@ you can use it to generate text with ellipsis
 var ellipsisText = new EllipsisText(document.querySelector('#ellipsis'), {
   str:
     "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's",
-  callback:function(res){
-      console.log(this.dotdotdot()) 
-      // output:You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three grave...
+  callback: function(res) {
+    console.log(this.dotdotdot())
+    // output:You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three grave...
   }
 })
 ```
 
-![](example.png)
+![example](example.png)
 
 ## EllipsisText API
 
 ```js
-new EllipsisText(
-  HTMLElement,
-{
+new EllipsisText(HTMLElement, {
   str: String,
   row: Number,
-  callback:function(res){}
+  callback: function(res) {}
 })
 ```
+### method
+
+#### ellipsisText.reCompute(str,callback)
+
+Recalculate and return the new result,this will save a lot of time than initialization
+
+##### ellipsisText.dotdotdot(ellipsis = "...", str)
 
 ## Tips
 
@@ -68,7 +73,6 @@ function dotdotdot just replace last three letter, but you can use [dotdotdot.js
 The following is an EllipsisText performance test (in ms)
 
 ![](performance.jpg)
-
 
 ## Development setup
 

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      !function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e=e||self).EllipsisText=t()}(this,function(){"use strict";function o(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(){function u(e,t){if(function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,u),!e)throw new Error("EllipsisText need a dom");this.options=u._mergeOptions(u._defaultOptions(),t),u._init.call(this,e,this.options)}return function(e,t,n){t&&o(e.prototype,t),n&&o(e,n)}(u,[{key:"reCompute",value:function(e,t){var n=this,o=u._mergeOptions(this.options,{str:e||this.options.str});u._computeResult(this._el,o.str,this._testOverflowDom,this._testOverflowCtx,this._lineHeight,this._computedStyle,function(e){n._result=e,t&&t.call(n,e)})}},{key:"dotdotdot",value:function(e,t){return e=e||"...",(t=t||this._result).substring(0,t.length-e.length)+e}}],[{key:"_defaultOptions",value:function(){return{str:"",row:3}}},{key:"_init",value:function(e,o){var i=this,r=this._el=e,l=this._computedStyle=window.getComputedStyle(r,null);u._getLineHeight(r,function(e){i._lineHeight=e||0;var t=i._testOverflowDom=u._createTestOverflowDom(r,e*o.row,o),n=i._testOverflowCtx=u._createTestOverflowCtx(l.width,e*o.row,l.fontSize,o);u._computeResult(r,o.str,t,n,e,l,function(e){i._result=e,o.callback&&o.callback.call(i,e)})})}},{key:"_mergeOptions",value:function(e,t){return Object.assign(e,t)}},{key:"_computeResult",value:function(t,n,o,i,r,l,s){o.innerHTML=n,t.appendChild(o),setTimeout(function(){var e=n;u._testOverflow(o)&&(e=u._computedOverflowDomContent(o,i,r,parseFloat(l.fontSize,10))),t.removeChild(o),s&&s(e)})}},{key:"_createTestLineHeghtDom",value:function(e){var t=e.cloneNode(!1),n=t.style;return n.overflow=n.visibility="hidden",n.position="absolute",n.opacity=0,n.left=0,n.right=0,t.innerHTML="a",t}},{key:"_createTestOverflowDom",value:function(e,t,n){var o=this.testOverflowDom=e.cloneNode(!0),i=o.style;return i.height=t+"px",i.overflow=i.visibility="hidden",i.position="absolute",i.opacity=0,i.left=0,i.right=0,o}},{key:"_createTestOverflowCtx",value:function(e,t,n,o){var i=document.createElement("canvas"),r=i.getContext("2d");return i.width=parseFloat(e,10),i.height=1.5*parseFloat(t,10),r.textBaseline="top",r.font="".concat(n," normal"),r}},{key:"_computedOverflowDomContent",value:function(e,t,n,o){for(var i=e.lastChild,r=i.textContent;1<e.childNodes.length&&i;){if(!u._testOverflow(e)){e.appendChild(i);break}e.removeChild(i),r=(i=e.lastChild).textContent}return r&&(i.textContent=u._computeLastText(e,r,i,t,n,o)),e.innerHTML}},{key:"_testOverflow",value:function(e){var t=e.scrollHeight;return e.clientHeight<t}},{key:"_computeSimilarText",value:function(e,t,n){for(var o=t.canvas,i=e.trim().split(""),r=o.width,l=0,s="",u=0;u<i.length;u++){var a=s+i[u];if(r<t.measureText(a).width&&0<u?(t.fillText(s,0,l),s=i[u],l+=n):s=a,l>o.height)break;t.fillText(s,0,l)}return i.slice(0,u).join("")}},{key:"_computeLastText",value:function(e,t,n,o,i,r){for(t=u._computeSimilarText(t,o,i,r);e;){var l=t.length;if(!(0<l&&u._testOverflow(e)))break;t=t.substr(0,l-1),n.textContent=t}return t}},{key:"_getLineHeight",value:function(e,t){var n=u._createTestLineHeghtDom(e);e.appendChild(n),setTimeout(function(){t&&t(n.clientHeight),e.removeChild(n)})}}]),u}()});
+    </script>
+    <style>
+      .main {
+        width: 280px;
+        overflow: hidden;
+        word-break: break-all;
+      }
+
+      .action {
+        margin-top: 16px;
+        width: 280px;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+      textarea {
+        margin: 0;
+        padding: 0;
+        display: block;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main"></div>
+    <div class="action">
+      <textarea id="text" rows="6" placeholder="请输入文本"></textarea>
+      <button id="resetText">resetText</button>
+    </div>
+    <script>
+      const main = document.querySelector('.main')
+      console.time('init')
+      let testStr =
+        "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's, the middle one, is old now, and half buried in plants which have grown over it. On one side is Edgar Linton's, and on the other is Heathcliff's new one. If you stay there a moment, and watch the insects flying in the warm summer air, and listen to the soft wind breathing through the grass, you'll understand how quietly they rest, the sleepers in that quiet earth"
+      var ellipsisText = new EllipsisText(main, {
+        str: testStr,
+        lineHeight: 3,
+        callback: function(res) {
+          console.timeEnd('init')
+          main.innerHTML = this.dotdotdot()
+          document
+            .querySelector('#resetText')
+            .addEventListener('click', function() {
+              var value = document.querySelector('#text').value
+              ellipsisText.reCompute(
+                value,
+                function(res) {
+                  main.innerHTML = res !== value ? this.dotdotdot() : res
+                }
+              )
+            })
+          console.log(this)
+        }
+      })
+    </script>
+  </body>
+</html>

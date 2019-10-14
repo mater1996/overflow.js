@@ -45,7 +45,7 @@ class EllipsisText {
         _computedStyle,
         res => {
           this._result = res
-          options.callback && options.callback.call(this,res)
+          options.callback && options.callback.call(this, res)
         }
       )
     })
@@ -69,9 +69,7 @@ class EllipsisText {
     el.appendChild(testOverflowDom)
     setTimeout(() => {
       let res = str
-      if (!EllipsisText._testOverflow(testOverflowDom)) {
-        el.removeChild(testOverflowDom)
-      } else {
+      if (EllipsisText._testOverflow(testOverflowDom)) {
         res = EllipsisText._computedOverflowDomContent(
           testOverflowDom,
           testOverflowCtx,
@@ -213,7 +211,7 @@ class EllipsisText {
 
   reCompute(str, cb) {
     const options = EllipsisText._mergeOptions(this.options, {
-      str: str
+      str: str || this.options.str
     })
     EllipsisText._computeResult(
       this._el,
@@ -222,7 +220,10 @@ class EllipsisText {
       this._testOverflowCtx,
       this._lineHeight,
       this._computedStyle,
-      cb
+      res => {
+        this._result = res
+        cb && cb.call(this, res)
+      }
     )
   }
 
