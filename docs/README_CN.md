@@ -45,7 +45,7 @@ var ellipsisText = new EllipsisText(document.querySelector('#ellipsis'), {
 })
 ```
 
-![example](https://github.com/Mater1996/ellipsis-text/blob/master/example.png)
+![example](https://raw.githubusercontent.com/Mater1996/ellipsis-text/master/example.png)
 
 ## EllipsisText API
 
@@ -79,7 +79,7 @@ EllipsisText使用画布确定近似的文本数量
 str X 10
 代表循环某一段文字累加10次
 
-![](https://github.com/Mater1996/ellipsis-text/blob/master/performance.jpg)
+![](https://raw.githubusercontent.com/Mater1996/ellipsis-text/master/performance.jpg)
 
 ## Development setup
 
