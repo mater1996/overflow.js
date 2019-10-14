@@ -8,24 +8,29 @@
         overflow: hidden;
         word-break: break-all;
       }
+      p {
+        margin: 0;
+        padding: 0;
+      }
     </style>
   </head>
   <body>
-    <div class="main">
-      
-    </div>
+    <div class="main"></div>
     <script>
       const main = document.querySelector('.main')
-      const time1 = Date.now()
-      let testStr = '<p>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame</p>'
-      var omit =  new EllipsisText(main,{
-        str:new Array(1000).fill(testStr).join(''),
-        callback:function(res){
-          main.innerHTML = res;
-          console.log(Date.now()-time1)
+      console.time('init')
+      let testStr =
+        "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's, the middle one, is old now, and half buried in plants which have grown over it. On one side is Edgar Linton's, and on the other is Heathcliff's new one. If you stay there a moment, and watch the insects flying in the warm summer air, and listen to the soft wind breathing through the grass, you'll understand how quietly they rest, the sleepers in that quiet earth"
+      var ellipsisText = new EllipsisText(main, {
+        str: testStr,
+        lineHeight: 3,
+        callback: function(res) {
+          console.timeEnd('init')
+          // main.innerHTML = res
+          main.innerHTML = this.dotdotdot()
+          console.log(this)
         }
       })
-      console.log(omit)
     </script>
   </body>
 </html>

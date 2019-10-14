@@ -12,9 +12,13 @@ npm install ellipsis-text --save-dev
 
 ## Usage example
 
+```html
+<div id="ellipsis"></div>
+```
+
 ```js
 import EllipsisText from 'ellipsis-text'
-new EllipsisText(dom, {
+new EllipsisText(document.querySelector('#ellipsis'), {
   str:
     'Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame',
   callback:function(res){
@@ -23,6 +27,21 @@ new EllipsisText(dom, {
   }
 })
 ```
+
+you can use it to generate text with ellipsis
+
+```js
+var ellipsisText = new EllipsisText(document.querySelector('#ellipsis'), {
+  str:
+    "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's",
+  callback:function(res){
+      console.log(this.dotdotdot()) 
+      // output:You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three grave...
+  }
+})
+```
+
+![](example.jpg)
 
 ## EllipsisText API
 
@@ -41,6 +60,8 @@ new EllipsisText(
 EllipsisText used canvas to determine the number of lines to be intercepted
 
 If you pass in HTML, it deletes the nodes one by one to find the last text node that exceeds the height
+
+function dotdotdot just replace last three letter, but you can use [dotdotdot.js](http://dotdotdot.frebsite.nl/) to do the following or rewrite this function
 
 ## Perfonmance
 

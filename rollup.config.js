@@ -2,6 +2,10 @@ import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 import pkg from './package.json'
+import { uglify } from 'rollup-plugin-uglify';
+import uglifyes from 'rollup-plugin-uglify-es';
+
+const production = !process.env.ROLLUP_WATCH;
 
 const babelOption = {
   presets: [
@@ -30,7 +34,8 @@ export default [
     plugins: [
       resolve(),
       babel(babelOption),
-      commonjs()
+      commonjs(),
+      (production && uglify()),
     ]
   },
   {
@@ -40,7 +45,8 @@ export default [
       { file: pkg.module, format: 'es' }
     ],
     plugins: [
-      babel(babelOption)
+      babel(babelOption),
+      (production && uglifyes()),
     ]
   }
 ]
