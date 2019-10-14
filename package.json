@@ -1,6 +1,6 @@
 {
   "name": "ellipsis-text",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A generator that gets the minimum content that corresponds to the height of an element",
   "keywords": [
     "ellipsis-text,dotdotdot,Clamp,ellipsis,textOverflow,javascript"
