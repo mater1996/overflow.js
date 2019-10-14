@@ -2,6 +2,8 @@
 
 > A generator that gets the minimum content that corresponds to the height of an element
 
+- [中文](https://github.com/Mater1996/ellipsis-text/blob/master/docs/README_CN.md)
+
 ## Installation
 
 npm:
