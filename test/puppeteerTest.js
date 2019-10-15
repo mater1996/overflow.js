@@ -21,14 +21,19 @@ module.exports = async function(data) {
           }
           const div = document.createElement('div')
           div.style.fontSize = '16px'
-          div.style.width = '80px'
-          div.style.height = '80px'
+          div.style.width = '40px'
+          div.style.height = '40px'
           document.body.appendChild(div)
+          let time1 = Date.now()
           new EllipsisText(div, {
             str: data[key],
             callback: function(res) {
               document.body.removeChild(div)
-              performance.push(res)
+              performance.push({
+                type: key,
+                res: res,
+                time: Date.now() - time1
+              })
               test(++n)
             }
           })

@@ -1,14 +1,16 @@
 const puppeteerTest = require('./puppeteerTest')
-it('should return same string', async () => {
-  const testStr = 'a'
-  const res = new Array(10).fill(testStr).join(' ')
-  function MockData() {
-    return {
-      X100: res
-    }
+const testStr = 'a'
+const res = new Array(10).fill(testStr).join(' ')
+function MockData() {
+  return {
+    X100: res
   }
+}
+it('should return same string', async () => {
   const resList = await puppeteerTest(MockData())
-  resList.forEach(v => {
-    expect(v).toBe(res)
-  })
+  resList
+    .map(v => v.res)
+    .forEach(v => {
+      expect(v).toBe(res)
+    })
 })
