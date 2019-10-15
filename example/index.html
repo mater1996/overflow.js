@@ -20,14 +20,14 @@
       const main = document.querySelector('.main')
       console.time('init')
       let testStr =
-        "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's, the middle one, is old now, and half buried in plants which have grown over it. On one side is Edgar Linton's, and on the other is Heathcliff's new one. If you stay there a moment, and watch the insects flying in the warm summer air, and listen to the soft wind breathing through the grass, you'll understand how quietly they rest, the sleepers in that quiet earth"
+        "Y"
       var ellipsisText = new EllipsisText(main, {
-        str: testStr,
-        lineHeight: 3,
+        str: new Array(100000).fill(testStr).join(''),
         callback: function(res) {
+          console.log(res)
           console.timeEnd('init')
-          // main.innerHTML = res
-          main.innerHTML = this.dotdotdot()
+          main.innerHTML = res
+          // main.innerHTML = this.dotdotdot()
           console.log(this)
         }
       })

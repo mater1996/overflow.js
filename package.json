@@ -20,6 +20,7 @@
     "@babel/preset-env": "^7.6.2",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-latest": "^6.24.1",
+    "jest": "^24.9.0",
     "puppeteer": "^1.20.0",
     "rollup": "^1.20.0",
     "rollup-plugin-babel": "^4.3.3",
@@ -32,10 +33,15 @@
     "build": "rollup -c",
     "build:test": "rollup -c rollup.config.test.js",
     "dev": "rollup -c -w",
-    "test": "node test/test.js",
-    "pretest": "npm run build:test"
+    "test": "jest",
+    "test:performance": "node ./test/performance.test.js",
+    "pretest": "npm run build:test",
+    "pretest:performance": "npm run build:test"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "jest": {
+    "rootDir": "test"
+  }
 }

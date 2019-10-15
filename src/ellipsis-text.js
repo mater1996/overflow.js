@@ -32,7 +32,7 @@ class EllipsisText {
       ))
       const _testOverflowCtx = (this._testOverflowCtx = EllipsisText._createTestOverflowCtx(
         _computedStyle.width,
-        lineHeight * options.row,
+        lineHeight * (options.row + 1),
         _computedStyle.fontSize,
         options
       ))
@@ -110,7 +110,7 @@ class EllipsisText {
     const canvas = document.createElement('canvas')
     const context = canvas.getContext('2d')
     canvas.width = parseFloat(width, 10)
-    canvas.height = parseFloat(height, 10) * 1.5
+    canvas.height = parseFloat(height, 10)
     context.textBaseline = 'top'
     context.font = `${fontSize} normal`
     return context
@@ -137,8 +137,8 @@ class EllipsisText {
     if (textContent) {
       lastChild.textContent = EllipsisText._computeLastText(
         testOverflowDom,
-        textContent,
         lastChild,
+        textContent,
         ctx,
         lineHeight,
         fontSize
@@ -181,23 +181,33 @@ class EllipsisText {
 
   static _computeLastText(
     testOverflowDom,
-    str,
     target,
+    str,
     ctx,
     lineHeight,
     fontSize
   ) {
     str = EllipsisText._computeSimilarText(str, ctx, lineHeight, fontSize)
-    while (testOverflowDom) {
-      const length = str.length
-      if (length > 0 && EllipsisText._testOverflow(testOverflowDom)) {
-        str = str.substr(0, length - 1)
-      } else {
-        break
-      }
-      target.textContent = str
+    return EllipsisText._halfComputeLastText(testOverflowDom, target, '', str)
+  }
+
+  static _halfComputeLastText(testOverflowDom, target, total, str) {
+    var max = str.length
+    var middle = Math.floor(max / 2)
+    var halfStr = str.slice(0, middle)
+    target.textContent = total + halfStr
+    if (EllipsisText._testOverflow(testOverflowDom)) {
+      return EllipsisText._halfComputeLastText(testOverflowDom, target, total, halfStr)
+    } else if (middle + 1 < max) {
+      return EllipsisText._halfComputeLastText(
+        testOverflowDom,
+        target,
+        total + halfStr,
+        str.slice(middle, max)
+      )
+    } else {
+      return target.textContent
     }
-    return str
   }
 
   static _getLineHeight(el, cb) {
