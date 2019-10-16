@@ -49,19 +49,6 @@ new EllipsisText(document.querySelector('#ellipsis'), {
 })
 ```
 
-### dotdotdot
-
-```js
-new EllipsisText(document.querySelector('#ellipsis'), {
-  str:
-    '<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame</span>',
-  callback: function(res) {
-    console.log(res)
-    // output:Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowled
-  }
-})
-```
-
 you can use it to generate text with ellipsis
 
 ```js
