@@ -43,15 +43,15 @@ new EllipsisText(document.querySelector('#ellipsis'), {
 })
 ```
 
-### 省略号
+你可以用它去生成带省略号的字符串
 
 ```js
 new EllipsisText(document.querySelector('#ellipsis'), {
   str:
-    '<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame</span>',
+    "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's",
   callback: function(res) {
-    console.log(res)
-    // output:Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowled
+    console.log(this.dotdotdot())
+    // output:You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three grave...
   }
 })
 ```
