@@ -2,7 +2,7 @@
 
 > 生成符合HTML元素高度的文本工具
 
-## Installation
+## 安装
 
 npm:
 
@@ -10,15 +10,13 @@ npm:
 npm install ellipsis-text --save-dev
 ```
 
-## Demo
+## 示例
 
-[demo](https://codepen.io/xbup/pen/eYYZeOd)
+[示例](https://codepen.io/xbup/pen/eYYZeOd)
 
-## Usage example
+## 使用
 
-```html
-<div id="ellipsis"></div>
-```
+### 文本输入
 
 ```js
 import EllipsisText from 'ellipsis-text'
@@ -31,16 +29,29 @@ new EllipsisText(document.querySelector('#ellipsis'), {
   }
 })
 ```
-
-you can use it to generate text with ellipsis
+### html字符串输入
 
 ```js
-var ellipsisText = new EllipsisText(document.querySelector('#ellipsis'), {
+import EllipsisText from 'ellipsis-text'
+new EllipsisText(document.querySelector('#ellipsis'), {
   str:
-    "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's",
+    '<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame</span>',
   callback: function(res) {
-    console.log(this.dotdotdot())
-    // output:You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three grave...
+    console.log(res)
+    // output:<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealt</span>
+  }
+})
+```
+
+### 省略号
+
+```js
+new EllipsisText(document.querySelector('#ellipsis'), {
+  str:
+    '<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame</span>',
+  callback: function(res) {
+    console.log(res)
+    // output:Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowled
   }
 })
 ```
@@ -49,6 +60,8 @@ var ellipsisText = new EllipsisText(document.querySelector('#ellipsis'), {
 
 ## EllipsisText API
 
+### 选项
+
 ```js
 new EllipsisText(HTMLElement, {
   str: String,
@@ -56,7 +69,7 @@ new EllipsisText(HTMLElement, {
   callback: function(res) {}
 })
 ```
-### method
+### 方法
 
 #### ellipsisText.reCompute(str,callback)
 

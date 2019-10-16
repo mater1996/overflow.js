@@ -109,13 +109,15 @@ class EllipsisText {
   ) {
     let lastChild = testOverflowDom.lastChild
     let textContent = testOverflowDom.textContent
-    while (testOverflowDom.childNodes.length > 1 && testOverflowDom.lastChild) {
-      if (this._testOverflow(testOverflowDom)) {
-        lastChild = testOverflowDom.removeChild(testOverflowDom.lastChild)
-        textContent = lastChild.textContent
-      } else {
-        testOverflowDom.appendChild(lastChild)
-        break
+    if (testOverflowDom.childNodes.length > 1) {
+      while (lastChild) {
+        if (this._testOverflow(testOverflowDom)) {
+          lastChild = testOverflowDom.removeChild(testOverflowDom.lastChild)
+          textContent = lastChild.textContent
+        } else {
+          testOverflowDom.appendChild(lastChild)
+          break
+        }
       }
     }
     if (this._testOverflow(testOverflowDom) && textContent) {
