@@ -35,9 +35,8 @@
     "build:test": "rollup -c rollup.config.test.js",
     "dev": "rollup -c -w",
     "test": "jest",
-    "test:performance": "node ./test/performance.test.js",
     "pretest": "npm run build:test",
-    "pretest:performance": "npm run build:test"
+    "prepublish": "npm run build"
   },
   "files": [
     "dist"
