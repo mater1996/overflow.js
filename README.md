@@ -94,7 +94,7 @@ new EllipsisText(HTMLElement, {
 
 Recalculate and return the new result,this will save a lot of time than initialization
 
-##### ellipsisText.dotdotdot(ellipsis = "...", str)
+#### ellipsisText.dotdotdot(ellipsis = "...", str)
 
 ## Tips
 
