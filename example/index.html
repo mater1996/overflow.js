@@ -3,7 +3,8 @@
   <head>
     <script src="../dist/ellipsis-text.umd.js"></script>
     <style>
-      .main {
+      .main,
+      .main2 {
         width: 280px;
         overflow: hidden;
         word-break: break-all;
@@ -16,19 +17,33 @@
   </head>
   <body>
     <div class="main"></div>
+    <div class="main2"></div>
     <script>
+      console.dir(EllipsisText)
       const main = document.querySelector('.main')
+      const main2 = document.querySelector('.main2')
+      const testStr = 'Y',
+        testStr2 = 'M'
+
       console.time('init')
-      let testStr =
-        "Y"
       var ellipsisText = new EllipsisText(main, {
-        str: new Array(100000).fill(testStr).join(''),
+        str: new Array(10000).fill(testStr).join(''),
         callback: function(res) {
           console.log(res)
           console.timeEnd('init')
           main.innerHTML = res
-          // main.innerHTML = this.dotdotdot()
-          console.log(this)
+        }
+      })
+
+      console.log(ellipsisText)
+
+      console.time('init2')
+      var ellipsisText2 = new EllipsisText(main2, {
+        str: new Array(10000).fill(testStr2).join(''),
+        callback: function(res) {
+          console.log(res)
+          console.timeEnd('init2')
+          main2.innerHTML = res
         }
       })
     </script>

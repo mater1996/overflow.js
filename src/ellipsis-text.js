@@ -3,11 +3,11 @@ class EllipsisText {
     if (!el) {
       throw new Error('EllipsisText need a dom')
     }
-    this.options = EllipsisText._mergeOptions(
+    this._options = EllipsisText._mergeOptions(
       EllipsisText._defaultOptions(),
       options
     )
-    EllipsisText._init.call(this, el, this.options)
+    EllipsisText._init.call(this, el, this._options)
   }
 
   static _defaultOptions() {
@@ -30,19 +30,12 @@ class EllipsisText {
         lineHeight * options.row,
         options
       ))
-      const _testOverflowCtx = (this._testOverflowCtx = EllipsisText._createTestOverflowCtx(
-        _computedStyle.width,
-        lineHeight * (options.row + 1),
-        _computedStyle.fontSize,
-        options
-      ))
       EllipsisText._computeResult(
         _el,
-        options.str,
+        options,
         _testOverflowDom,
-        _testOverflowCtx,
-        lineHeight,
         _computedStyle,
+        lineHeight,
         res => {
           this._result = res
           options.callback && options.callback.call(this, res)
@@ -58,23 +51,22 @@ class EllipsisText {
 
   static _computeResult(
     el,
-    str,
+    options,
     testOverflowDom,
-    testOverflowCtx,
-    lineHeight,
     computedStyle,
+    lineHeight,
     cb
   ) {
-    testOverflowDom.innerHTML = str
+    testOverflowDom.innerHTML = options.str
     el.appendChild(testOverflowDom)
     setTimeout(() => {
-      let res = str
-      if (EllipsisText._testOverflow(testOverflowDom)) {
-        res = EllipsisText._computedOverflowDomContent(
+      let res = options.str
+      if (this._testOverflow(testOverflowDom)) {
+        res = this._computedOverflowDomContent(
+          options,
           testOverflowDom,
-          testOverflowCtx,
-          lineHeight,
-          parseFloat(computedStyle.fontSize, 10)
+          computedStyle,
+          lineHeight
         )
       }
       el.removeChild(testOverflowDom)
@@ -95,7 +87,7 @@ class EllipsisText {
   }
 
   static _createTestOverflowDom(el, height, options) {
-    let testOverflowDom = (this.testOverflowDom = el.cloneNode(true))
+    let testOverflowDom = el.cloneNode(true)
     const style = testOverflowDom.style
     style.height = height + 'px'
     style.overflow = style.visibility = 'hidden'
@@ -106,26 +98,16 @@ class EllipsisText {
     return testOverflowDom
   }
 
-  static _createTestOverflowCtx(width, height, fontSize, options) {
-    const canvas = document.createElement('canvas')
-    const context = canvas.getContext('2d')
-    canvas.width = parseFloat(width, 10)
-    canvas.height = parseFloat(height, 10)
-    context.textBaseline = 'top'
-    context.font = `${fontSize} normal`
-    return context
-  }
-
   static _computedOverflowDomContent(
+    options,
     testOverflowDom,
-    ctx,
-    lineHeight,
-    fontSize
+    computedStyle,
+    lineHeight
   ) {
     let lastChild = testOverflowDom.lastChild
     let textContent = lastChild.textContent
     while (testOverflowDom.childNodes.length > 1 && lastChild) {
-      if (EllipsisText._testOverflow(testOverflowDom)) {
+      if (this._testOverflow(testOverflowDom)) {
         testOverflowDom.removeChild(lastChild)
       } else {
         testOverflowDom.appendChild(lastChild)
@@ -135,13 +117,12 @@ class EllipsisText {
       textContent = lastChild.textContent
     }
     if (textContent) {
-      lastChild.textContent = EllipsisText._computeLastText(
+      lastChild.textContent = this._computeLastText(
         testOverflowDom,
         lastChild,
         textContent,
-        ctx,
-        lineHeight,
-        fontSize
+        this._setTestOverflowCtx(options, computedStyle, lineHeight),
+        lineHeight
       )
     }
     return testOverflowDom.innerHTML
@@ -152,43 +133,33 @@ class EllipsisText {
     return scrollHeight > clientHeight
   }
 
-  static _computeSimilarText(str, ctx, lineHeight) {
-    const canvas = ctx.canvas
-    const arrText = str.trim().split('')
-    const maxWidth = canvas.width
-    let y = 0
-    let x = 0
-    var line = ''
-    let n = 0
-    for (; n < arrText.length; n++) {
-      var testLine = line + arrText[n]
-      var metrics = ctx.measureText(testLine)
-      var testWidth = metrics.width
-      if (testWidth > maxWidth && n > 0) {
-        ctx.fillText(line, x, y)
-        line = arrText[n]
-        y += lineHeight
-      } else {
-        line = testLine
-      }
-      if (y > canvas.height) {
-        break
-      }
-      ctx.fillText(line, x, y)
-    }
-    return arrText.slice(0, n).join('')
+  static _createTestOverflowCtx() {
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+    return context
   }
 
-  static _computeLastText(
-    testOverflowDom,
-    target,
-    str,
-    ctx,
-    lineHeight,
-    fontSize
-  ) {
-    str = EllipsisText._computeSimilarText(str, ctx, lineHeight, fontSize)
-    return EllipsisText._halfComputeLastText(testOverflowDom, target, '', str)
+  static _getTestOverflowCtx() {
+    if (!this._testOverflowCtx)
+      Object.defineProperty(this, '_testOverflowCtx', {
+        value: this._createTestOverflowCtx()
+      })
+    return this._testOverflowCtx
+  }
+
+  static _setTestOverflowCtx(options, computedStyle, lineHeight) {
+    const ctx = this._getTestOverflowCtx()
+    const canvas = ctx.canvas
+    canvas.width = parseFloat(computedStyle.width, 10)
+    canvas.height = lineHeight * (options.row + 1)
+    ctx.font = `${computedStyle.fontSize} normal`
+    ctx.textBaseline = 'top'
+    return ctx
+  }
+
+  static _computeLastText(testOverflowDom, target, str, ctx, lineHeight) {
+    str = this._computeSimilarText(str, ctx, lineHeight)
+    return this._halfComputeLastText(testOverflowDom, target, '', str)
   }
 
   static _halfComputeLastText(testOverflowDom, target, total, str) {
@@ -196,10 +167,10 @@ class EllipsisText {
     var middle = Math.floor(max / 2)
     var halfStr = str.slice(0, middle)
     target.textContent = total + halfStr
-    if (EllipsisText._testOverflow(testOverflowDom)) {
-      return EllipsisText._halfComputeLastText(testOverflowDom, target, total, halfStr)
+    if (this._testOverflow(testOverflowDom)) {
+      return this._halfComputeLastText(testOverflowDom, target, total, halfStr)
     } else if (middle + 1 < max) {
-      return EllipsisText._halfComputeLastText(
+      return this._halfComputeLastText(
         testOverflowDom,
         target,
         total + halfStr,
@@ -210,8 +181,36 @@ class EllipsisText {
     }
   }
 
+  static _computeSimilarText(str, ctx, lineHeight) {
+    const canvas = ctx.canvas
+    const arrText = str.trim().split('')
+    const maxWidth = canvas.width
+    const maxHeight = canvas.height
+    let y = 0
+    let x = 0
+    let n = 0
+    let line = ''
+    for (; n < arrText.length; n++) {
+      const testLine = line + arrText[n]
+      const metrics = ctx.measureText(testLine)
+      const testWidth = metrics.width
+      if (testWidth > maxWidth && n > 0) {
+        ctx.fillText(line, x, y)
+        line = arrText[n]
+        y += lineHeight
+      } else {
+        line = testLine
+      }
+      if (y > maxHeight) {
+        break
+      }
+      ctx.fillText(line, x, y)
+    }
+    return arrText.slice(0, n).join('')
+  }
+
   static _getLineHeight(el, cb) {
-    const testLineHeightDom = EllipsisText._createTestLineHeghtDom(el)
+    const testLineHeightDom = this._createTestLineHeghtDom(el)
     el.appendChild(testLineHeightDom)
     setTimeout(() => {
       cb && cb(testLineHeightDom.clientHeight)
@@ -220,16 +219,15 @@ class EllipsisText {
   }
 
   reCompute(str, cb) {
-    const options = EllipsisText._mergeOptions(this.options, {
-      str: str || this.options.str
+    const options = this._mergeOptions(this._options, {
+      str: str || this._options.str
     })
     EllipsisText._computeResult(
       this._el,
-      options.str,
+      options,
       this._testOverflowDom,
-      this._testOverflowCtx,
-      this._lineHeight,
       this._computedStyle,
+      this._lineHeight,
       res => {
         this._result = res
         cb && cb.call(this, res)
