@@ -75,7 +75,7 @@ new EllipsisText(HTMLElement, {
 
 重新计算文本
 
-##### ellipsisText.dotdotdot(ellipsis = "...", str)
+#### ellipsisText.dotdotdot(ellipsis = "...", str)
 
 ## 提示
 
