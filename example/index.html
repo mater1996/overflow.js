@@ -23,13 +23,12 @@
       const main = document.querySelector('.main')
       const main2 = document.querySelector('.main2')
       const testStr = 'Y',
-        testStr2 = 'M'
+        testStr2 = '<span>Y</span>'
 
       console.time('init')
       var ellipsisText = new EllipsisText(main, {
         str: new Array(10000).fill(testStr).join(''),
         callback: function(res) {
-          console.log(res)
           console.timeEnd('init')
           main.innerHTML = res
         }
@@ -39,13 +38,14 @@
 
       console.time('init2')
       var ellipsisText2 = new EllipsisText(main2, {
-        str: new Array(10000).fill(testStr2).join(''),
+        str: new Array(100).fill(testStr2).join(''),
         callback: function(res) {
-          console.log(res)
           console.timeEnd('init2')
           main2.innerHTML = res
         }
       })
+
+      console.log(ellipsisText2)
     </script>
   </body>
 </html>

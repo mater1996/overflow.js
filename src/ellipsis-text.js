@@ -23,8 +23,9 @@ class EllipsisText {
       _el,
       null
     ))
-    EllipsisText._getLineHeight(_el, lineHeight => {
-      this._lineHeight = lineHeight || 0
+    EllipsisText._getLineHeight(_el, _computedStyle, lineHeight => {
+      this._lineHeight =
+        lineHeight || 1.2 * parseFloat(_computedStyle.fontSize, 10)
       const _testOverflowDom = (this._testOverflowDom = EllipsisText._createTestOverflowDom(
         _el,
         lineHeight * options.row,
@@ -45,8 +46,7 @@ class EllipsisText {
   }
 
   static _mergeOptions(defaultOptions, options) {
-    const mergedOptions = Object.assign(defaultOptions, options)
-    return mergedOptions
+    return Object.assign(defaultOptions, options)
   }
 
   static _computeResult(
@@ -77,11 +77,14 @@ class EllipsisText {
   static _createTestLineHeghtDom(el) {
     let testLineHeightDom = el.cloneNode(false)
     const style = testLineHeightDom.style
-    style.overflow = style.visibility = 'hidden'
+    style.visibility = 'hidden'
     style.position = 'absolute'
     style.opacity = 0
-    style.left = 0
-    style.right = 0
+    style.left = -9999 + 'px'
+    style.top = -9999 + 'px'
+    style.margin = style.padding = 0
+    style.border = 'none'
+    style.outline = 'none'
     testLineHeightDom.innerHTML = 'a'
     return testLineHeightDom
   }
@@ -105,18 +108,17 @@ class EllipsisText {
     lineHeight
   ) {
     let lastChild = testOverflowDom.lastChild
-    let textContent = lastChild.textContent
-    while (testOverflowDom.childNodes.length > 1 && lastChild) {
+    let textContent = testOverflowDom.textContent
+    while (testOverflowDom.childNodes.length > 1 && testOverflowDom.lastChild) {
       if (this._testOverflow(testOverflowDom)) {
-        testOverflowDom.removeChild(lastChild)
+        lastChild = testOverflowDom.removeChild(testOverflowDom.lastChild)
+        textContent = lastChild.textContent
       } else {
         testOverflowDom.appendChild(lastChild)
         break
       }
-      lastChild = testOverflowDom.lastChild
-      textContent = lastChild.textContent
     }
-    if (textContent) {
+    if (this._testOverflow(testOverflowDom) && textContent) {
       lastChild.textContent = this._computeLastText(
         testOverflowDom,
         lastChild,
@@ -124,6 +126,8 @@ class EllipsisText {
         this._setTestOverflowCtx(options, computedStyle, lineHeight),
         lineHeight
       )
+      if (lastChild.textContent.length <= 0)
+        testOverflowDom.removeChild(lastChild)
     }
     return testOverflowDom.innerHTML
   }
@@ -209,13 +213,17 @@ class EllipsisText {
     return arrText.slice(0, n).join('')
   }
 
-  static _getLineHeight(el, cb) {
-    const testLineHeightDom = this._createTestLineHeghtDom(el)
-    el.appendChild(testLineHeightDom)
-    setTimeout(() => {
-      cb && cb(testLineHeightDom.clientHeight)
-      el.removeChild(testLineHeightDom)
-    })
+  static _getLineHeight(el, computedStyle, cb) {
+    if (/normal|unset|inherit|initial/g.test(computedStyle.lineHeight)) {
+      const testLineHeightDom = this._createTestLineHeghtDom(el)
+      el.appendChild(testLineHeightDom)
+      setTimeout(() => {
+        cb && cb(testLineHeightDom.clientHeight)
+        el.removeChild(testLineHeightDom)
+      })
+    } else {
+      cb && cb(parseFloat(computedStyle.lineHeight, 10))
+    }
   }
 
   reCompute(str, cb) {
