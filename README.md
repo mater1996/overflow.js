@@ -104,7 +104,7 @@ If you pass in HTML, it deletes the nodes one by one to find the last text node 
 
 function dotdotdot just replace last three letter, but you can use [dotdotdot.js](http://dotdotdot.frebsite.nl/) to do the following or rewrite this function
 
-## Perfonmance
+## Performance
 
 The following is an EllipsisText performance test (in ms)
 

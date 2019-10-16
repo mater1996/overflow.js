@@ -77,7 +77,7 @@ new EllipsisText(HTMLElement, {
 
 ##### ellipsisText.dotdotdot(ellipsis = "...", str)
 
-## Tips
+## 提示
 
 EllipsisText使用画布确定近似的文本数量
 
@@ -86,7 +86,7 @@ EllipsisText使用画布确定近似的文本数量
 方法 dotdotdot仅仅是将最后的三个字符替换为...
 你也可以使用 [dotdotdot.js](http://dotdotdot.frebsite.nl/) 进行接下来的替换操作 或者 重写 dotdotdot方法
 
-## Perfonmance
+## 性能
 
 下面是性能展示（ms）
 str X 10
