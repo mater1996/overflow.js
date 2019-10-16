@@ -19,8 +19,10 @@ npm install ellipsis-text --save-dev
 ## Usage example
 
 ```html
-<div id="ellipsis"></div>
+<div id="ellipsis" style="width:280px"></div>
 ```
+
+### string input
 
 ```js
 import EllipsisText from 'ellipsis-text'
@@ -33,11 +35,37 @@ new EllipsisText(document.querySelector('#ellipsis'), {
   }
 })
 ```
+### string dom input
+
+```js
+import EllipsisText from 'ellipsis-text'
+new EllipsisText(document.querySelector('#ellipsis'), {
+  str:
+    '<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame</span>',
+  callback: function(res) {
+    console.log(res)
+    // output:<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealt</span>
+  }
+})
+```
+
+### dotdotdot
+
+```js
+new EllipsisText(document.querySelector('#ellipsis'), {
+  str:
+    '<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame</span>',
+  callback: function(res) {
+    console.log(res)
+    // output:Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowled
+  }
+})
+```
 
 you can use it to generate text with ellipsis
 
 ```js
-var ellipsisText = new EllipsisText(document.querySelector('#ellipsis'), {
+new EllipsisText(document.querySelector('#ellipsis'), {
   str:
     "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's",
   callback: function(res) {
@@ -50,6 +78,8 @@ var ellipsisText = new EllipsisText(document.querySelector('#ellipsis'), {
 ![example](https://raw.githubusercontent.com/Mater1996/ellipsis-text/master/example.png)
 
 ## EllipsisText API
+
+### options
 
 ```js
 new EllipsisText(HTMLElement, {
@@ -74,7 +104,7 @@ If you pass in HTML, it deletes the nodes one by one to find the last text node 
 
 function dotdotdot just replace last three letter, but you can use [dotdotdot.js](http://dotdotdot.frebsite.nl/) to do the following or rewrite this function
 
-## Perfonmance
+## Performance
 
 The following is an EllipsisText performance test (in ms)
 
