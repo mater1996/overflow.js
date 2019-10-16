@@ -229,7 +229,7 @@ class EllipsisText {
   }
 
   reCompute(str, cb) {
-    const options = this._mergeOptions(this._options, {
+    const options = EllipsisText._mergeOptions(this._options, {
       str: str || this._options.str
     })
     EllipsisText._computeResult(
