@@ -1,15 +1,15 @@
-# EllipsisText
+# Overflow
 
 > A generator that gets the minimum content that corresponds to the height of an element
 
-- [中文](https://github.com/Mater1996/ellipsis-text/blob/master/docs/README_CN.md)
+- [中文](https://github.com/Mater1996/overflow.js/blob/master/docs/README_CN.md)
 
 ## Installation
 
 npm:
 
 ```sh
-npm install ellipsis-text --save-dev
+npm install overflow.js --save-dev
 ```
 
 ## Demo
@@ -19,14 +19,14 @@ npm install ellipsis-text --save-dev
 ## Usage example
 
 ```html
-<div id="ellipsis" style="width:280px"></div>
+<div id="overflow" style="width:280px"></div>
 ```
 
 ### string input
 
 ```js
-import EllipsisText from 'ellipsis-text'
-new EllipsisText(document.querySelector('#ellipsis'), {
+import Overflow from 'overflow'
+new Overflow(document.querySelector('#overflow'), {
   str:
     'Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame',
   callback: function(res) {
@@ -36,10 +36,10 @@ new EllipsisText(document.querySelector('#ellipsis'), {
 })
 ```
 
-you can use it to generate text with ellipsis
+you can use it to generate text with overflow
 
 ```js
-new EllipsisText(document.querySelector('#ellipsis'), {
+new Overflow(document.querySelector('#overflow'), {
   str:
     "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's",
   callback: function(res) {
@@ -49,14 +49,14 @@ new EllipsisText(document.querySelector('#ellipsis'), {
 })
 ```
 
-![example](https://raw.githubusercontent.com/Mater1996/ellipsis-text/master/example.png)
+![example](https://raw.githubusercontent.com/Mater1996/overflow.js/master/example.png)
 
-## EllipsisText API
+## Overflow API
 
 ### options
 
 ```js
-new EllipsisText(HTMLElement, {
+new Overflow(HTMLElement, {
   str: String,
   row: Number,
   scrollTop: Number,
@@ -65,15 +65,15 @@ new EllipsisText(HTMLElement, {
 ```
 ### method
 
-#### ellipsisText.reCompute(str,callback)
+#### overflow.reCompute(str,callback)
 
 Recalculate and return the new result,this will save a lot of time than initialization
 
-#### ellipsisText.dotdotdot(ellipsis = "...", str)
+#### overflow.dotdotdot(ellipsis = "...", str)
 
 ## Tips
 
-EllipsisText used canvas to determine the number of lines to be intercepted
+Overflow used canvas to determine the number of lines to be intercepted
 
 If you pass in HTML, it deletes the nodes one by one to find the last text node that exceeds the height
 
@@ -81,9 +81,9 @@ function dotdotdot just replace last three letter, but you can use [dotdotdot.js
 
 ## Performance
 
-The following is an EllipsisText performance test (in ms)
+The following is an Overflow performance test (in ms)
 
-![](https://raw.githubusercontent.com/Mater1996/ellipsis-text/master/performance.jpg)
+![](https://raw.githubusercontent.com/Mater1996/overflow.js/master/performance.jpg)
 
 ## Development setup
 
@@ -97,6 +97,8 @@ npm run test
 
 ## Release History
 
+- 1.0.17
+  - add scrollTop property
 - 1.0.0
   - The first release
 
@@ -106,11 +108,11 @@ Mater1996 – bxh8640@gmail.com
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
-[LICENSE](https://github.com/Mater1996/ellipsis-text/blob/master/LICENSE)
+[LICENSE](https://github.com/Mater1996/overflow.js/blob/master/LICENSE)
 
 ## Contributing
 
-1. Fork it (<https://github.com/Mater1996/ellipsis-text>)
+1. Fork it (<https://github.com/Mater1996/overflow.js>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)

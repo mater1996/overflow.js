@@ -1,4 +1,4 @@
-# EllipsisText
+# Overflow
 
 > 生成符合HTML元素高度的文本工具
 
@@ -7,7 +7,7 @@
 npm:
 
 ```sh
-npm install ellipsis-text --save-dev
+npm install overflow.js --save-dev
 ```
 
 ## 示例
@@ -19,8 +19,8 @@ npm install ellipsis-text --save-dev
 ### 文本输入
 
 ```js
-import EllipsisText from 'ellipsis-text'
-new EllipsisText(document.querySelector('#ellipsis'), {
+import Overflow from 'overflow'
+new Overflow(document.querySelector('#overflow'), {
   str:
     'Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame',
   callback: function(res) {
@@ -33,7 +33,7 @@ new EllipsisText(document.querySelector('#ellipsis'), {
 你可以用它去生成带省略号的字符串
 
 ```js
-new EllipsisText(document.querySelector('#ellipsis'), {
+new Overflow(document.querySelector('#overflow'), {
   str:
     "You'll pass the churchyard, Mr Lockwood, on your way back to the Grange, and you'll see the three graverestones close to the moor. Catherine's",
   callback: function(res) {
@@ -43,14 +43,14 @@ new EllipsisText(document.querySelector('#ellipsis'), {
 })
 ```
 
-![example](https://raw.githubusercontent.com/Mater1996/ellipsis-text/master/example.png)
+![example](https://raw.githubusercontent.com/Mater1996/overflow.js/master/example.png)
 
-## EllipsisText API
+## Overflow API
 
 ### 选项
 
 ```js
-new EllipsisText(HTMLElement, {
+new Overflow(HTMLElement, {
   str: String,
   row: Number,
   scrollTop: Number, // 偏移量
@@ -59,11 +59,11 @@ new EllipsisText(HTMLElement, {
 ```
 ### 方法
 
-#### ellipsisText.reCompute(str,callback)
+#### overflow.reCompute(str,callback)
 
 重新计算文本
 
-#### ellipsisText.dotdotdot(ellipsis = "...", str)
+#### overflow.dotdotdot(ellipsis = "...", str)
 
 ## 提示
 
@@ -80,7 +80,7 @@ EllipsisText使用画布确定近似的文本数量
 str X 10
 代表循环某一段文字累加10次
 
-![](https://raw.githubusercontent.com/Mater1996/ellipsis-text/master/performance.jpg)
+![](https://raw.githubusercontent.com/Mater1996/overflow.js/master/performance.jpg)
 
 ## Development setup
 
@@ -94,6 +94,8 @@ npm run test
 
 ## Release History
 
+- 1.0.17
+  - add scrollTop property
 - 1.0.0
   - The first release
 
@@ -103,11 +105,11 @@ Mater1996 – bxh8640@gmail.com
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
-[LICENSE](https://github.com/Mater1996/ellipsis-text/blob/master/LICENSE)
+[LICENSE](https://github.com/Mater1996/overflow.js/blob/master/LICENSE)
 
 ## Contributing
 
-1. Fork it (<https://github.com/Mater1996/ellipsis-text>)
+1. Fork it (<https://github.com/Mater1996/overflow.js>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
