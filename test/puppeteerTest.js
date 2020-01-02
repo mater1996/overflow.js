@@ -1,11 +1,16 @@
-const EllipsisText = require('../dist/ellipsis-text.umd')
+
+const fs = require('fs');
+const path = require('path');
+const Overflow = fs.readFileSync(path.resolve('.','./dist/overflow.umd.js'), 'utf8')
 const puppeteer = require('puppeteer')
+
 jest.setTimeout(300000)
+
 module.exports = async function(data) {
   const browser = await puppeteer.launch({})
   const page = await browser.newPage()
   await page.addScriptTag({
-    content: EllipsisText.toString()
+    content: Overflow.toString()
   })
   const res = await page.evaluate(
     options => {
@@ -22,10 +27,9 @@ module.exports = async function(data) {
           const div = document.createElement('div')
           div.style.fontSize = '16px'
           div.style.width = '40px'
-          div.style.height = '40px'
           document.body.appendChild(div)
           let time1 = Date.now()
-          new EllipsisText(div, {
+          new Overflow(div, {
             str: data[key],
             callback: function(res) {
               document.body.removeChild(div)

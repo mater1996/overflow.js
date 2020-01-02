@@ -29,19 +29,6 @@ new EllipsisText(document.querySelector('#ellipsis'), {
   }
 })
 ```
-### html字符串输入
-
-```js
-import EllipsisText from 'ellipsis-text'
-new EllipsisText(document.querySelector('#ellipsis'), {
-  str:
-    '<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame</span>',
-  callback: function(res) {
-    console.log(res)
-    // output:<span>Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealt</span>
-  }
-})
-```
 
 你可以用它去生成带省略号的字符串
 
@@ -66,6 +53,7 @@ new EllipsisText(document.querySelector('#ellipsis'), {
 new EllipsisText(HTMLElement, {
   str: String,
   row: Number,
+  scrollTop: Number, // 偏移量
   callback: function(res) {}
 })
 ```

@@ -25,9 +25,9 @@ const babelOption = {
 
 export default [
   {
-    input: 'src/ellipsis-text.js',
+    input: 'src/overflow.js',
     output: {
-      name: 'EllipsisText',
+      name: 'Overflow',
       file: pkg.browser,
       format: 'umd'
     },
@@ -39,7 +39,7 @@ export default [
     ]
   },
   {
-    input: 'src/ellipsis-text.js',
+    input: 'src/overflow.js',
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' }

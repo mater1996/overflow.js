@@ -1,6 +1,6 @@
 const puppeteerTest = require('./puppeteerTest')
 const testStr = 'a'
-const res = new Array(10).fill(testStr).join(' ')
+const res = new Array(5).fill(testStr).join(' ')
 function MockData() {
   return {
     X100: res
