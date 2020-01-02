@@ -1,18 +1,18 @@
 {
-  "name": "ellipsis-text",
+  "name": "overflow.js",
   "version": "1.0.11",
   "description": "A generator that gets the minimum content that corresponds to the height of an element",
   "keywords": [
     "ellipsis-text,dotdotdot,Clamp,ellipsis,textOverflow,javascript"
   ],
-  "main": "dist/ellipsis-text.cjs.js",
-  "module": "dist/ellipsis-text.esm.js",
-  "browser": "dist/ellipsis-text.umd.js",
+  "main": "dist/overflow.cjs.js",
+  "module": "dist/overflow.esm.js",
+  "browser": "dist/overflow.umd.js",
   "private": false,
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Mater1996/ellipsis-text.git"
+    "url": "git@github.com:Mater1996/overflow.git"
   },
   "dependencies": {},
   "devDependencies": {

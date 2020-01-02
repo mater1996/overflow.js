@@ -1,7 +1,7 @@
 const puppeteerTest = require('./puppeteerTest')
 const testStr = 'a'
 const res =
-  'a a a a a a a a a a a a a a a'
+  'a a a a a a a a a '
 function MockData() {
   return {
     X100: new Array(100).fill(testStr).join(' '),
