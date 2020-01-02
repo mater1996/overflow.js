@@ -1,5 +1,5 @@
 {
-  "name": "overflow.js",
+  "name": "overflowjs",
   "version": "1.0.16",
   "description": "A generator that gets the minimum content that corresponds to the height of an element",
   "keywords": [

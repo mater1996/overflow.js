@@ -9,7 +9,7 @@
 npm:
 
 ```sh
-npm install overflow.js --save-dev
+npm install overflowjs --save-dev
 ```
 
 ## Demo
@@ -25,7 +25,7 @@ npm install overflow.js --save-dev
 ### string input
 
 ```js
-import Overflow from 'overflow'
+import Overflow from 'overflowjs'
 new Overflow(document.querySelector('#overflow'), {
   str:
     'Fame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame,wealth and knowledge are merely worldly possessions that are withinthe reach of anybodyFame',
